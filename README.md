@@ -1,10 +1,28 @@
 # TV 项目品牌化说明
 
+BRANDING_GUIDE
+
+一个基于fongmiTV开源项目的TV版影视APP，包含一个web网页版管理系统，可以自定义“名字+logo + 内置接口 + 打包 APK”
+
+官方主页：https://10000yun.com/
+
+教程及配置：https://10000yun.com/300.html
+
+关注公众号：玩云匣
+
+灵感来自：https://github.com/FongMi/TV
+
+**玩云盒子TV-完整源码：**
+
+https://github.com/cheerqjy/10000yun-box-tv-app
+
+
+
 这个项目现在已经补了一层品牌化入口，你可以手改源码，也可以直接用 `tv-admin` 网页后台来做。
 
 ## 推荐入口
 
-- 网页后台目录：`C:\Users\EDY\Desktop\TV-release\tv-admin`
+- 网页后台目录：`TV-release/tv-admin`
 - 启动命令：`node .\tv-admin\server.js`
 - 打开地址：[http://127.0.0.1:8787](http://127.0.0.1:8787)
 
