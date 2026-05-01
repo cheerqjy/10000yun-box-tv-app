@@ -16,6 +16,8 @@ BRANDING_GUIDE
 
 https://github.com/cheerqjy/10000yun-box-tv-app
 
+https://gitee.com/cheerqjy/10000yun-box-tv-app
+
 这个项目现在已经补了一层品牌化入口，你可以手改源码，也可以直接用 `tv-admin` 网页后台来做。
 
 仅供学习，不能用于任何商业活动！
