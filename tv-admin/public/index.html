@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TV 管理后台</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">TV Admin Console</p>
+        <h1>影视 APK 品牌化与打包后台</h1>
+        <p class="sub">这里可以修改应用名、包名、内置接口、首页 logo、TV banner、默认背景，并在保存签名信息后直接一键打包 APK。</p>
+      </div>
+      <div class="status-grid">
+        <article class="status-card">
+          <span class="label">Java 状态</span>
+          <strong id="javaStatus">检测中</strong>
+        </article>
+        <article class="status-card">
+          <span class="label">Android SDK</span>
+          <strong id="androidStatus">检测中</strong>
+        </article>
+        <article class="status-card">
+          <span class="label">Python 3.10</span>
+          <strong id="pythonStatus">检测中</strong>
+        </article>
+        <article class="status-card">
+          <span class="label">签名配置</span>
+          <strong id="signingStatus">检测中</strong>
+        </article>
+        <article class="status-card">
+          <span class="label">默认内置配置</span>
+          <strong id="vodConfigStatus">检测中</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>品牌信息</h2>
+        <button class="ghost" id="reloadState">刷新状态</button>
+      </div>
+      <div class="grid cols-3">
+        <label>
+          <span>应用名称</span>
+          <input id="appName" placeholder="例如：玩云盒子TV">
+        </label>
+        <label>
+          <span>简中名称</span>
+          <input id="appNameZhCN" placeholder="例如：玩云盒子TV">
+        </label>
+        <label>
+          <span>繁中名称</span>
+          <input id="appNameZhTW" placeholder="例如：玩云盒子TV">
+        </label>
+        <label>
+          <span>Application ID</span>
+          <input id="applicationId" placeholder="com.example.tv">
+        </label>
+        <label>
+          <span>更新源根地址</span>
+          <input id="updateBaseUrl" placeholder="可留空，留空则仍使用原项目更新地址">
+        </label>
+        <label>
+          <span>JAVA_HOME</span>
+          <input id="javaHome" placeholder="可留空，默认读取系统级 JAVA_HOME">
+        </label>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>内置接口与资源</h2>
+        <button class="primary" id="saveBranding">保存品牌与内置配置</button>
+      </div>
+      <div class="grid cols-2">
+        <label class="wide">
+          <span>内置 VOD 配置 JSON</span>
+          <textarea id="vodJson" rows="18" placeholder='{"sites": []}'></textarea>
+        </label>
+        <div class="stack">
+          <label>
+            <span>首页 logo</span>
+            <input id="homeLogo" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+          </label>
+          <label>
+            <span>默认背景</span>
+            <input id="backgroundImage" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+          </label>
+          <label>
+            <span>桌面图标</span>
+            <input id="launcherIcon" type="file" accept="image/png,image/jpeg,image/webp">
+          </label>
+          <label>
+            <span>TV Banner</span>
+            <input id="tvBanner" type="file" accept="image/png,image/jpeg,image/webp">
+          </label>
+          <label>
+            <span>默认直播配置 URL</span>
+            <input id="defaultLiveConfig" placeholder="可留空，也可以填 http/file/assets 地址">
+          </label>
+          <label>
+            <span>默认背景 URL</span>
+            <input id="defaultWallConfig" placeholder="可留空；上传背景图后会自动写入 assets:// 地址">
+          </label>
+          <label>
+            <span>启动提示 / 公告</span>
+            <textarea id="brandNotice" rows="4" placeholder="会写入内置 VOD 配置的 notice 字段"></textarea>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>签名信息</h2>
+        <button class="secondary" id="saveSigning">保存签名信息</button>
+      </div>
+      <div class="grid cols-3">
+        <label>
+          <span>keystore 文件路径</span>
+          <input id="storeFile" placeholder="例如：C:\keys\wanyunhezi.jks">
+        </label>
+        <label>
+          <span>keyAlias</span>
+          <input id="keyAlias" placeholder="例如：wanyunhezi">
+        </label>
+        <label>
+          <span>storePassword / keyPassword</span>
+          <input id="storePassword" type="password" placeholder="会保存到 local.properties">
+        </label>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>一键打包</h2>
+        <button class="accent" id="buildApk">开始构建</button>
+      </div>
+      <div class="grid cols-3">
+        <label>
+          <span>界面版本</span>
+          <select id="buildMode">
+            <option value="leanback">leanback TV</option>
+            <option value="mobile">mobile</option>
+          </select>
+        </label>
+        <label>
+          <span>ABI</span>
+          <select id="buildAbi">
+            <option value="arm64_v8a">arm64-v8a</option>
+            <option value="armeabi_v7a">armeabi-v7a</option>
+          </select>
+        </label>
+        <label>
+          <span>构建类型</span>
+          <select id="buildType">
+            <option value="release">release</option>
+            <option value="debug">debug</option>
+          </select>
+        </label>
+      </div>
+      <div class="log-wrap">
+        <div id="buildResult" class="result">等待构建</div>
+        <pre id="buildLog" class="log"></pre>
+      </div>
+    </section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "logo": "assets://brand/home_logo.jpg",
+  "notice": "Replace this built-in config from the web admin before packaging your own APK.",
+  "sites": [],
+  "parses": [],
+  "flags": [],
+  "ads": []
+}
